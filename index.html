@@ -5,6 +5,8 @@
 <input name="reset" type="reset" value="Reset" id="reset" onclick="reset();">
 </form><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script><script type="text/javascript">
   var stopwatch = document.querySelector(".stopwatch");
+  var seconds = 00; 
+  var tens = 00;
   stopwatch = function() {
     var timer, clock, interval;
     function start() {
@@ -19,8 +21,6 @@
     }
   };
   window.onload = function () {
-  var seconds = 00; 
-  var tens = 00; 
   var appendTens = document.getElementById("tens")
   var appendSeconds = document.getElementById("seconds")
   var buttonStart = document.getElementById('start');
