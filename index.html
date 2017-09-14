@@ -1,14 +1,51 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>StopWatch</title></head><body>
-<h1 id="time">00:00:00:00</h1>
-<button id="start">Start</button>
-<button id="stop">Stop</button>
-<button id="clear">Clear</button>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script><script type="text/javascript">
-var start = document.getElementById("start"),
-    stop = document.getElementById("stop"),
-    clear = document.getElementById("clear"),
-    hours = 0,
-    mins = 0,
-    seconds = 0,
-    msecs = 0;
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="style.css" type="text/css"><title>StopWatch</title></head><body>
+  <div class="container">
+    <p id="output">00:00:00</p>
+    <div id="controls">
+      <button id="startPause" onclick="startPause();">Start</button>
+      <button onclick="reset();">Reset</button>
+    </div>
+  </div><script type="text/javascript">
+  var time = 0;
+  var running=0;
+  function startPause() {
+    if(running==0) {
+      running = 1;
+      increment();
+      document.getElementById("startPause").innerHTML = "Pause";
+    } else {
+      running = 0;
+      document.getElementById("startPause").innerHTML = "Resume";
+    }
+  }
+
+  function reset() {
+    running = 0;
+    time = 0;
+    document.getElementById("startPause").innerHTML = "Start";
+    document.getElementById("output").innerHTML = "00:00:00";
+  }
+
+  function increment() {
+    if(running == 1) {
+      setTimeout(function() {
+        time++;
+        var mins = Math.floor(time/10/60);
+        var secs = Math.floor(time/10);
+        var tenths = time % 10;
+
+        if(mins<10) {
+          mins = "0" + mins;
+        }
+
+        if(secs<10) {
+          secs = "0" + secs;
+        }
+
+        document.getElementById("output").innerHTML = mins + ":" + secs + ":" + "0" + tenths;
+        increment();
+      }, 100);
+    }
+  }
 </script></body></html>
